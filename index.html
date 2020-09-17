@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .container {
+        width: 500px;
+        height: 300px;
+        overflow: hidden;
+      }
+      .inner-box {
+        width: 2000px; /* 500 x 4 = 2000 */
+      }
+      .inner-box > div {
+        width: 500px;
+        height: 300px;
+        float: left;
+      }
+      .inner-box > div > img {
+        width: 100%;
+        height: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="inner-box">
+        <div>
+          <img src="./image/1.jpg" alt="" />
+        </div>
+        <div>
+          <img src="./image/2.jpg" alt="" />
+        </div>
+        <div>
+          <img src="./image/3.jpg" alt="" />
+        </div>
+
+        <div>
+          <img src="./image/1.jpg" alt="" />
+        </div>
+      </div>
+    </div>
+
+    <script>
+      let curIndex = 0;
+      const maxLength =
+        document.querySelectorAll(".inner-box > div").length - 1;
+      let timer = null;
+
+      const width = 500;
+
+      const innerBox = document.querySelector(".inner-box");
+
+      timer = setInterval(autoPlay, 1500);
+      
+      function autoPlay() {
+        if (curIndex < maxLength) {
+          curIndex++;
+          get_next();
+        } else {
+          curIndex = 0;
+          get_reset();
+        }
+      }
+      function get_next() {
+        innerBox.style.transform = `translateX(-${25 * curIndex}%)`;
+        innerBox.style.transition = `${0.3}s`;
+      }
+
+      function get_reset() {
+        innerBox.style.transform = `translateX(0)`;
+        innerBox.style.transition = `${0}s`;
+      }
+    </script>
+  </body>
+</html>
